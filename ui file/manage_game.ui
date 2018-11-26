@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>게임 관리</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" rowspan="2">
+    <widget class="QTableWidget" name="tableWidget">
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>경기</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>시작시간</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말1</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말2</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말3</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말4</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말5</string>
+      </property>
+     </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string>경기1</string>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>3시</string>
+      </property>
+     </item>
+     <item row="0" column="2">
+      <property name="text">
+       <string>Apple</string>
+      </property>
+     </item>
+     <item row="0" column="3">
+      <property name="text">
+       <string>Banana</string>
+      </property>
+     </item>
+     <item row="0" column="4">
+      <property name="text">
+       <string>Charlie</string>
+      </property>
+     </item>
+     <item row="0" column="5">
+      <property name="text">
+       <string>Delta</string>
+      </property>
+     </item>
+     <item row="0" column="6">
+      <property name="text">
+       <string>Echo</string>
+      </property>
+     </item>
+     <item row="1" column="0">
+      <property name="text">
+       <string>경기2</string>
+      </property>
+     </item>
+     <item row="1" column="1">
+      <property name="text">
+       <string>4시</string>
+      </property>
+     </item>
+     <item row="1" column="2">
+      <property name="text">
+       <string>Banana</string>
+      </property>
+     </item>
+     <item row="1" column="3">
+      <property name="text">
+       <string>Charlie</string>
+      </property>
+     </item>
+     <item row="1" column="4">
+      <property name="text">
+       <string>Delta</string>
+      </property>
+     </item>
+     <item row="1" column="5">
+      <property name="text">
+       <string>Echo</string>
+      </property>
+     </item>
+     <item row="1" column="6">
+      <property name="text">
+       <string>Fox</string>
+      </property>
+     </item>
+     <item row="2" column="0">
+      <property name="text">
+       <string>경기3</string>
+      </property>
+     </item>
+     <item row="2" column="1">
+      <property name="text">
+       <string>4시반</string>
+      </property>
+     </item>
+     <item row="2" column="2">
+      <property name="text">
+       <string>Charlie</string>
+      </property>
+     </item>
+     <item row="2" column="3">
+      <property name="text">
+       <string>Delta</string>
+      </property>
+     </item>
+     <item row="2" column="4">
+      <property name="text">
+       <string>Echo</string>
+      </property>
+     </item>
+     <item row="2" column="5">
+      <property name="text">
+       <string>Fox</string>
+      </property>
+     </item>
+     <item row="2" column="6">
+      <property name="text">
+       <string>Golf</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="add_btn">
+       <property name="text">
+        <string>추가</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="delete_btn">
+       <property name="text">
+        <string>삭제</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

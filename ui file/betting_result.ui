@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>625</width>
+    <height>135</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>4</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>경기</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>말 이름</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>종료 여부</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>성적</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>배당률</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>베팅 금액</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>베당 금액</string>
+      </property>
+     </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string>경기1</string>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>Apple</string>
+      </property>
+     </item>
+     <item row="0" column="2">
+      <property name="text">
+       <string>경기 전</string>
+      </property>
+     </item>
+     <item row="0" column="4">
+      <property name="text">
+       <string>1.34</string>
+      </property>
+     </item>
+     <item row="0" column="5">
+      <property name="text">
+       <string>100</string>
+      </property>
+     </item>
+     <item row="0" column="6">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </item>
+     <item row="1" column="0">
+      <property name="text">
+       <string>경기2</string>
+      </property>
+     </item>
+     <item row="1" column="1">
+      <property name="text">
+       <string>Banna</string>
+      </property>
+     </item>
+     <item row="1" column="2">
+      <property name="text">
+       <string>경기 전</string>
+      </property>
+     </item>
+     <item row="1" column="4">
+      <property name="text">
+       <string>1.2</string>
+      </property>
+     </item>
+     <item row="1" column="5">
+      <property name="text">
+       <string>200</string>
+      </property>
+     </item>
+     <item row="1" column="6">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </item>
+     <item row="2" column="0">
+      <property name="text">
+       <string>경기3</string>
+      </property>
+     </item>
+     <item row="2" column="1">
+      <property name="text">
+       <string>Charlie</string>
+      </property>
+     </item>
+     <item row="2" column="2">
+      <property name="text">
+       <string>경기 종료</string>
+      </property>
+     </item>
+     <item row="2" column="3">
+      <property name="text">
+       <string>1</string>
+      </property>
+     </item>
+     <item row="2" column="4">
+      <property name="text">
+       <string>1.6</string>
+      </property>
+     </item>
+     <item row="2" column="5">
+      <property name="text">
+       <string>3000</string>
+      </property>
+     </item>
+     <item row="2" column="6">
+      <property name="text">
+       <string>200</string>
+      </property>
+     </item>
+     <item row="3" column="0">
+      <property name="text">
+       <string>경기4</string>
+      </property>
+     </item>
+     <item row="3" column="1">
+      <property name="text">
+       <string>Delta</string>
+      </property>
+     </item>
+     <item row="3" column="2">
+      <property name="text">
+       <string>경기 종료</string>
+      </property>
+     </item>
+     <item row="3" column="3">
+      <property name="text">
+       <string>2</string>
+      </property>
+     </item>
+     <item row="3" column="4">
+      <property name="text">
+       <string>2.6</string>
+      </property>
+     </item>
+     <item row="3" column="5">
+      <property name="text">
+       <string>400</string>
+      </property>
+     </item>
+     <item row="3" column="6">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>확인</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
