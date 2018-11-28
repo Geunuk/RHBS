@@ -1,6 +1,5 @@
 from db.table import Table
 
-
 class Horse_Info(Table):
     def __init__(self, name, feature, rating=1500):
         self.name = name

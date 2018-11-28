@@ -6,45 +6,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>160</width>
-    <height>202</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>경기 추가</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="input_horse3_2">
        <property name="text">
-        <string>경기</string>
+        <string> 경기 이름</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="input_game_name"/>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="start_time_label">
        <property name="text">
         <string>시작시간</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="3" column="0">
+      <widget class="QLabel" name="horse1_label">
        <property name="text">
         <string>말1</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox">
+     <item row="3" column="1">
+      <widget class="QComboBox" name="input_horse1">
        <item>
         <property name="text">
          <string>Amy</string>
@@ -72,94 +87,65 @@
        </item>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
+     <item row="4" column="0">
+      <widget class="QLabel" name="horse2_label">
        <property name="text">
         <string>말2</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_6">
+     <item row="5" column="0">
+      <widget class="QLabel" name="horse3_label">
        <property name="text">
         <string>말3</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_5">
+     <item row="6" column="0">
+      <widget class="QLabel" name="horse4_label">
        <property name="text">
         <string>말4</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_7">
+     <item row="7" column="0">
+      <widget class="QLabel" name="horse5_label">
        <property name="text">
         <string>말5</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QComboBox" name="comboBox_2">
-       <item>
-        <property name="text">
-         <string>Amy</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Banana</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Chalie</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Delta</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Echo</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QComboBox" name="comboBox_3">
-       <item>
-        <property name="text">
-         <string>Amy</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Banana</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Chalie</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Delta</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Echo</string>
-        </property>
-       </item>
-      </widget>
-     </item>
      <item row="4" column="1">
-      <widget class="QComboBox" name="comboBox_4">
+      <widget class="QComboBox" name="input_horse2">
+       <item>
+        <property name="text">
+         <string>Amy</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Banana</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Chalie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Delta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Echo</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QComboBox" name="input_horse5">
        <item>
         <property name="text">
          <string>Amy</string>
@@ -188,7 +174,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QComboBox" name="comboBox_5">
+      <widget class="QComboBox" name="input_horse3">
        <item>
         <property name="text">
          <string>Amy</string>
@@ -216,10 +202,59 @@
        </item>
       </widget>
      </item>
+     <item row="6" column="1">
+      <widget class="QComboBox" name="input_horse4">
+       <item>
+        <property name="text">
+         <string>Amy</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Banana</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Chalie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Delta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Echo</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QTimeEdit" name="input_start_time">
+       <property name="locale">
+        <locale language="English" country="UnitedStates"/>
+       </property>
+       <property name="minimumDateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2000</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+       <property name="currentSection">
+        <enum>QDateTimeEdit::AmPmSection</enum>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="1" column="0">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="add_game_ok_btn">
      <property name="text">
       <string>추가</string>
      </property>

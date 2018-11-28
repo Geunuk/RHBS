@@ -180,8 +180,9 @@ class Ui_MainWindow(object):
         logged_in_member.show_point_exchange_box()
 
     def init_game_manage_btn_clicked(self):
+        print("init game manage btn clicked")
         logged_in_admin = self.__am.login_account
-        logged_in_admin.show_game()
+        logged_in_admin.show_manage_game_box()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

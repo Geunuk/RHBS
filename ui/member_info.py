@@ -13,7 +13,7 @@ class Ui_Dialog(object):
         self.__am = account_manager
         self.__init_ui = init_ui
         self.__dialog = None
-        self.__modify_flag = False
+        self.modify_flag = False
 
         self.pw_repeat_label = None
         self.input_pw_repeat = None
@@ -114,12 +114,11 @@ class Ui_Dialog(object):
         self.input_phone_number.setText(member.phone_number)
         self.input_point.setText(str(member.point))
 
-        if self.__modify_flag:
+        if self.modify_flag:
             self.input_pw_repeat.setText(member.password)
 
     def member_info_ok_btn_clicked_connect(self):
-        if not self.__modify_flag:
-            self.__modify_flag = True
+        if not self.modify_flag:
             self.__dialog.setWindowTitle("개인정보수정")
 
             self.pw_repeat_label = QtWidgets.QLabel(self.__dialog)
@@ -139,24 +138,25 @@ class Ui_Dialog(object):
             self.member_info_ok_btn.setText("확인")
             self.formLayout.insertRow(2, self.pw_repeat_label, self.input_pw_repeat)
 
+            self.modify_flag = True
+
         else:
-            self.__modify_flag = False
 
             pw1 = self.input_pw.text()
             pw2 = self.input_pw_repeat.text()
             anum = self.input_account_number.text()
             email = self.input_email.text()
             pnum = self.input_phone_number.text()
-            self.__am.change_member_info(pw1, pw2, anum, email, pnum)
+            if self.__am.change_member_info(pw1, pw2, anum, email, pnum):
+                self.formLayout.removeRow(2)
+                self.__dialog.setWindowTitle("회원정보확인")
+                self.member_info_ok_btn.setText("수정")
 
-            self.formLayout.removeRow(2)
-            self.__dialog.setWindowTitle("회원정보확인")
-            self.member_info_ok_btn.setText("수정")
-
-            self.input_pw.setEnabled(False)
-            self.input_account_number.setEnabled(False)
-            self.input_email.setEnabled(False)
-            self.input_phone_number.setEnabled(False)
+                self.input_pw.setEnabled(False)
+                self.input_account_number.setEnabled(False)
+                self.input_email.setEnabled(False)
+                self.input_phone_number.setEnabled(False)
+                self.modify_flag = False
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

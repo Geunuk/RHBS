@@ -5,6 +5,8 @@ from PyQt5 import QtWidgets
 import Account_Manager
 import Game_Manager
 from ui import init
+from db.table import Table
+
 
 
 def main():
