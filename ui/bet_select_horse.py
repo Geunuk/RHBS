@@ -19,6 +19,7 @@ class Ui_Dialog(object):
         self.__game = None
 
     def setupUi(self, Dialog):
+        self.__dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 250)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -81,24 +82,18 @@ class Ui_Dialog(object):
             self.horse_table.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(self.__game.horses[row].feature)
             self.horse_table.setItem(row, 1, item)
-            item = QtWidgets.QTableWidgetItem(self.__game.dividend_rate)
+            item = QtWidgets.QTableWidgetItem(str(self.__game.dividend_rate[row]))
             self.horse_table.setItem(row, 2, item)
 
     def betting_btn_clicked(self):
         print("betting btn clicked")
         choice_idx = self.horse_table.currentRow()
-        #print(choice_idx)
         bet_point = self.input_point.text()
-        #print(bet_point)
         pw = self.input_pw.text()
-        #print(pw)
         horse_name = self.__game.horses[choice_idx].name
-        #print(horse_name)
         game_id = self.__game.game_id
-        #print(bet_point,pw,game_id)
 
-        self.__member.bet(bet_point,pw,game_id,horse_name)
-        #print(self.__member.id)
+        self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

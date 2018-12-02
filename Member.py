@@ -3,7 +3,7 @@ from db import table,betting_info
 
 
 class Member():
-    def __init__(self, id, pw, name, ssn, anum,  email, pnum, point, init_ui, init_window):
+    def __init__(self, id, pw, name, ssn, anum,  email, pnum, point, init_ui, init_window,gm):
         self.__id = id
         self.__password = pw
         self.__name = name
@@ -12,9 +12,9 @@ class Member():
         self.__email = email
         self.__phone_number = pnum
         self.__point = point
-
         self.__init_ui = init_ui
         self.__init_window = init_window
+        self.__gm = gm
         self.__point_charge_Dialog = None
         self.__point_charge_ui = None
         self.__point_exchange_Dialog = None
@@ -29,6 +29,7 @@ class Member():
     @id.setter
     def id(self, id):
         self.__id = id
+
 
     @property
     def password(self):
@@ -165,10 +166,11 @@ class Member():
             self.__point_exchange_Dialog.setEnabled(False)
             self.__ashow_error_box(self.__point_exchange_Dialog, "유효하지 않은 입력입니다")
 
-    def bet(self,bet_point,pw,game_id,horse_name):
+    def bet(self,bet_point,pw,game_id,horse_name,dialog):
         print("betting")
         if (self.isvalid_point(bet_point,"exchange")) and (self.isvalid_pw(pw)):
             self.point = self.point - int(bet_point)
+            dialog.close()
 
             member_table = table.Table("member_info")
             popped_member = member_table.pop_row((self.id,))
@@ -176,6 +178,16 @@ class Member():
             popped_member.point = self.__point
             member_table.append(popped_member)
             member_table.save_file()
+            info = betting_info.Betting_Info(self.__id,game_id,horse_name,bet_point)
+            game_list = self.__gm.game_list
+            for game in game_list:
+
+                #print(game.id)
+                if game_id == game.id:
+                    game.betting_info.append(info)
+                    game.calc_dividend_rate()
+
+
 
             betting_info_table = table.Table("betting_info")
             bet_info = betting_info.Betting_Info(self.__id,game_id,horse_name,bet_point)
@@ -183,9 +195,15 @@ class Member():
             betting_info_table.append(bet_info)
             betting_info_table.save_file()
 
-        else:
-            print("betting failed")
+        elif ((self.isvalid_point(bet_point, "exchange")) == False):
+            print("point 입력 잘못")
+            msg = "포인트 입력이 잘못 되었습니다."
+            self.show_error_box(dialog,msg)
 
+        else:
+            print("pw 입력 잘못")
+            msg = "pw 입력이 잘못 되었습니다."
+            self.show_error_box(dialog, msg)
             #self.__bet_select_game_Dialog.setEnabled(False)
             #self.__ashow_error_box(self.__bet_select_game_Dialog, "유효하지 않은 입력입니다")
 

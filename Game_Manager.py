@@ -1,18 +1,15 @@
 #import Member
 #import Admin
 from ui import dialog, error, member_info as mem_info,game_status_show,betting_result
-#from db import member_info, table
+from db import member_info, table
+import Game
+
 class Game_Manager:
     def __init__(self):
-        self.__game_list = None
+        self.__game_list = []
         self.__horse_list = None
         self.__init_ui = None
         self.__init_window = None
-        '''self.__signup_Dialog = None
-        self.__signup_ui = None
-        self.__login_Dialog = None
-        self.__login_ui = None'''
-
         self.__betting_result_Dialog = None
         self.__betting_result_ui = None
         self.__game_status_show_Dialog = None
@@ -56,7 +53,18 @@ class Game_Manager:
         ...
 
     def init_game(self):
-        ...
+        print("게임 객체 생성하자")
+        game_list = table.Table("game_info")
+        betting_list = table.Table("betting_info")
+        for game in game_list:
+            bet_info = []
+            for info in betting_list:
+                if(info.game_id == game.game_id):
+                    bet_info.append(info)
+            game1 = Game.Game(game.game_id,game.proceeding,game.result,game.horses,game.start_time,bet_info,game.dividend_rate)
+            #game1.calc_dividend_rate()
+            self.__game_list.append(game1)
+
 
     def show_game_status(self):
         ...

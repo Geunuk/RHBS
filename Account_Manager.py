@@ -4,9 +4,9 @@ from ui import dialog, signup, login, error, member_info as mem_info
 from db import member_info, table
 
 class Account_Manager():
-    def __init__(self):
+    def __init__(self,gm):
         self.__login_account = None
-
+        self.__gm = gm
         self.__init_ui = None
         self.__init_window = None
         self.__signup_Dialog = None
@@ -145,7 +145,7 @@ class Account_Manager():
                                                      , member_info[2], member_info[3]
                                                      , member_info[4], member_info[5]
                                                      , member_info[6], int(member_info[7])
-                                                     , self.__init_ui, self.__init_window)
+                                                     , self.__init_ui, self.__init_window,self.__gm)
 
         elif valid_result == 1:
             print("not valid login")
@@ -277,6 +277,3 @@ class Account_Manager():
             return 2
         else:
             return 0
-
-    def isvalid_pw(self):
-        ...

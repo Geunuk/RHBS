@@ -58,7 +58,7 @@ class Admin():
             for horse_name in horse_name_list:
                 print(horse_name)
                 horse_info_list.append(horse_table.get_row((horse_name,)))
-            new_game = game_info.Game_Info(game_id, start_time, None, horse_info_list, None, False)
+            new_game = game_info.Game_Info(game_id, start_time, None, horse_info_list, [1,1,1,1,1], False)
             game_table = table.Table("game_info")
             game_table.append(new_game)
             game_table.save_file()

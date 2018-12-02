@@ -6,12 +6,12 @@ import Account_Manager
 import Game_Manager
 from ui import init
 from db.table import Table
-
-
+#from time import sleep
 
 def main():
-    am = Account_Manager.Account_Manager()
     gm = Game_Manager.Game_Manager()
+    am = Account_Manager.Account_Manager(gm)
+
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -22,7 +22,7 @@ def main():
     am.init_window = MainWindow
     gm.init_ui = init_ui
     gm.init_window= MainWindow
-
+    gm.init_game()
     MainWindow.show()
     sys.exit(app.exec_())
 
