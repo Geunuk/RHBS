@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
         self.init_bet_result_btn.clicked.connect(
             self.init_bet_result_btn_clicked)
         self.init_game_status_btn.clicked.connect(
-            self.init_game_manage_btn_clicked)
+            self.init_game_status_btn_clicked)
         self.init_charge_point_btn.clicked.connect(
             self.init_charge_point_btn_clicked)
         self.init_exchange_point_btn.clicked.connect(
@@ -160,11 +160,13 @@ class Ui_MainWindow(object):
             self.__am.show_signup_box()
 
     def init_bet_btn_clicked(self):
+        print("init bet_btn clicked")
         logged_in_member = self.__am.login_account
-        logged_in_member.bet()
+        logged_in_member.show_bet_box()
 
     def init_bet_result_btn_clicked(self):
-        self.__gm.show_bet_result()
+        print("show bet result")
+        self.__gm.show_betting_result()
 
     def init_game_status_btn_clicked(self):
         self.__gm.show_game_status()

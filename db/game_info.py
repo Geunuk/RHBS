@@ -2,8 +2,7 @@ from db.table import Table
 
 
 class Game_Info(Table):
-    def __init__(self, game_id, start_time, result, horses,\
-                 dividend_rate, proceeding):
+    def __init__(self, game_id, start_time, result, horses, dividend_rate, proceeding):
         self.game_id = game_id
         self.start_time = start_time
         self.result = result

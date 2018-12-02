@@ -20,6 +20,8 @@ def main():
 
     am.init_ui = init_ui
     am.init_window = MainWindow
+    gm.init_ui = init_ui
+    gm.init_window= MainWindow
 
     MainWindow.show()
     sys.exit(app.exec_())

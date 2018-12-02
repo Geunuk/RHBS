@@ -61,6 +61,7 @@ class Account_Manager():
     def show_member_info_box(self):
         print("show member info box")
         main_window = self.__init_ui.main_window
+        print(self.__init_ui.main_window)
         main_window.setEnabled(False)
 
         self.__member_info_Dialog = dialog.Dialog_Modified(self.__init_window)

@@ -4,7 +4,7 @@ class Betting_Info(Table):
     def __init__(self, member_id, game_id, horse_name, bet_money):
         self.member_id = member_id
         self.game_id = game_id
-        self.hose_name = horse_name
+        self.horse_name = horse_name
         self.bet_money = bet_money
         self.key = (self.member_id,self.game_id)
 
