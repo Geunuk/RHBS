@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
         self.__am = account_manager
         self.__gm = game_manager
         self.__main_window = None
+        self.timer1 = QtCore.QTimer(self.__main_window)
+        self.timer1.start(1000*1)
+        self.timer1.timeout.connect(self.timeout)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -135,6 +138,9 @@ class Ui_MainWindow(object):
     @property
     def main_window(self):
         return self.__main_window
+
+    def timeout(self):
+        self.__gm.check_game_finish()
 
     def init_login_btn_clicked(self):
         if self.__am.login_account:

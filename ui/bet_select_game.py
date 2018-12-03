@@ -52,10 +52,10 @@ class Ui_Dialog(object):
         choice_idx = self.game_table.currentRow()
         print("show betting horse box")
         if(self.__game_table[choice_idx].proceeding == False):
-            main_window = self.__init_ui.main_window
-            main_window.setEnabled(False)
+            #main_window = self.__init_ui.main_window
+            self.__dialog.setEnabled(False)
 
-            self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__init_window)
+            self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__dialog)
             self.__bet_select_horse_ui = bet_select_horse.Ui_Dialog(self.__member, self.__init_ui,choice_idx)
             self.__bet_select_horse_ui.setupUi(self.__bet_select_horse_Dialog)
             self.__bet_select_horse_Dialog.show()

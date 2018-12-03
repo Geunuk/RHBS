@@ -12,7 +12,6 @@ def main():
     gm = Game_Manager.Game_Manager()
     am = Account_Manager.Account_Manager(gm)
 
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     init_ui = init.Ui_MainWindow(am, gm)

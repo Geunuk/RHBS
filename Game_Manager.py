@@ -50,7 +50,8 @@ class Game_Manager:
         self.__horse_list = horse_list
 
     def check_game_finish(self):
-        ...
+        print("check game finished")
+
 
     def init_game(self):
         print("게임 객체 생성하자")
