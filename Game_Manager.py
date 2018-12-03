@@ -67,7 +67,16 @@ class Game_Manager:
 
 
     def show_game_status(self):
-        ...
+        print("경기진행상황확인")
+
+        self.__init_window.setEnabled(False)
+        self.__game_status_show_Dialog = dialog.Dialog_Modified(self.__init_window)
+        self.__game_status_show_ui = game_status_show.Ui_Dialog(self, self.__init_ui, self.__init_window)
+        self.__game_status_show_ui.setupUi(self.__game_status_show_Dialog)
+        self.__game_status_show_Dialog.show()
+
+    def game_status_exit(self):
+        self.__game_status_show_Dialog.close()
 
     def show_betting_result(self):
         print("show_betting_result 호출")

@@ -27,4 +27,9 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
+
+    libpaths = QtWidgets.QApplication.libraryPaths()
+    libpaths.append("C:\\Users\서강휘\AppData\Local\Programs\Python\Python37\Lib\site-packages\PyQt5\Qt\plugins")
+    QtWidgets.QApplication.setLibraryPaths(libpaths)
+
     main()
