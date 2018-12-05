@@ -30,7 +30,6 @@ class Member():
     def id(self, id):
         self.__id = id
 
-
     @property
     def password(self):
         return self.__password
@@ -94,9 +93,20 @@ class Member():
 
         self.__bet_select_game_Dialog = dialog.Dialog_Modified(self.__init_window)
         self.__bet_select_game_ui = bet_select_game.Ui_Dialog(self, self.__init_ui,self.__init_window)
+        self.__bet_select_game_ui.game_manager = self.__gm
         self.__bet_select_game_ui.setupUi(self.__bet_select_game_Dialog)
         self.__bet_select_game_Dialog.show()
 
+    def show_betting_result(self):
+        print("show_betting_result 호출")
+        main_window = self.__init_ui.main_window
+        main_window.setEnabled(False)
+
+        self.__betting_result_Dialog = dialog.Dialog_Modified(self.__init_window)
+        self.__betting_result_ui = betting_result.Ui_Dialog(self, self.__init_ui)
+        self.__betting_result_ui.game_manager = self.__gm
+        self.__betting_result_ui.setupUi(self.__betting_result_Dialog)
+        self.__betting_result_Dialog.show()
 
     def show_point_charge_box(self):
         print("show point charge box")
@@ -186,8 +196,6 @@ class Member():
                 if game_id == game.id:
                     game.betting_info.append(info)
                     game.calc_dividend_rate()
-
-
 
             betting_info_table = table.Table("betting_info")
             bet_info = betting_info.Betting_Info(self.__id,game_id,horse_name,bet_point)

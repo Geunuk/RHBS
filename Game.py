@@ -18,6 +18,7 @@ class Game():
     def id(self, id):
         self.__id = id
 
+
     @property
     def proceeding(self):
         return self.__proceeding
@@ -90,11 +91,22 @@ class Game():
         ...
 
     def decide_result(self):
-        ...
+        self.__result = [0,1,2,3,4]
 
 #   경기 종료 -> 멤버에게 넘겨줄 포인트 계산
-    def calc_dividend(self, horse, point):
-        ...
+    def calc_dividend(self):
+        print("포인트를 되돌려주자")
+        member_table = table.Table("member_info")
+        idx = self.__result[0]
+        for info in self.__betting_info:
+            if(info.horse_name == self.__horses[idx].name):
+                print("포인트 추가~~~")
+                popped_member = member_table.pop_row((info.member_id,))
+
+                popped_member.point += int(int(info.bet_money) * self.__dividend_rate[idx])
+                member_table.append(popped_member)
+                member_table.save_file()
+
 
     def show_game_result(self):
         ...

@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
         self.__am = account_manager
         self.__gm = game_manager
         self.__main_window = None
+        self.timer1 = QtCore.QTimer(self.__main_window)
+        self.timer1.start(1000 * 1)
+        self.timer1.timeout.connect(self.timeout)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -136,6 +139,9 @@ class Ui_MainWindow(object):
     def main_window(self):
         return self.__main_window
 
+    def timeout(self):
+        self.__gm.check_game_finish()
+
     def init_login_btn_clicked(self):
         if self.__am.login_account:
             self.init_login_btn.setText("로그인")
@@ -166,7 +172,8 @@ class Ui_MainWindow(object):
 
     def init_bet_result_btn_clicked(self):
         print("show bet result")
-        self.__gm.show_betting_result()
+        logged_in_member = self.__am.login_account
+        logged_in_member.show_betting_result()
 
     def init_game_status_btn_clicked(self):
         self.__gm.show_game_status()

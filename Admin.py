@@ -1,7 +1,8 @@
 import datetime
 
 from ui import dialog, manage_game, manage_game_add, error
-from db import table, game_info
+from db import table
+import Game
 
 class Admin():
     def __init__(self, init_ui, init_window):
@@ -12,6 +13,15 @@ class Admin():
         self.__game_manage_ui = None
         self.__manage_game_add_Dialog = None
         self.__manage_game_add_ui = None
+        self.__game_manager = None
+
+    @property
+    def game_manager(self):
+        return self.__game_manager
+
+    @game_manager.setter
+    def game_manager(self, game_manager):
+        self.__game_manager = game_manager
 
     def show_manage_game_box(self):
         print("show manage game box")
@@ -19,6 +29,7 @@ class Admin():
 
         self.__game_manage_Dialog = dialog.Dialog_Modified(self.__init_window)
         self.__game_manage_ui = manage_game.Ui_Dialog(self, self.__init_ui)
+        self.__game_manage_ui.game_manager = self.__game_manager
         self.__game_manage_ui.setupUi(self.__game_manage_Dialog)
         self.__game_manage_Dialog.show()
 
@@ -58,10 +69,12 @@ class Admin():
             for horse_name in horse_name_list:
                 print(horse_name)
                 horse_info_list.append(horse_table.get_row((horse_name,)))
-            new_game = game_info.Game_Info(game_id, start_time, None, horse_info_list, [1,1,1,1,1], False)
+            new_game = Game.Game(game_id,False,None,horse_info_list,start_time,None,[1,1,1,1,1])
+            self.__game_manager.game_list.append(new_game)
+            '''new_game = game_info.Game_Info(game_id, start_time, None, horse_info_list, [1,1,1,1,1], False)
             game_table = table.Table("game_info")
             game_table.append(new_game)
-            game_table.save_file()
+            game_table.save_file()'''
             self.__game_manage_ui.set_game_table()
 
         elif valid_result == 1:
@@ -83,9 +96,11 @@ class Admin():
 
     def delete_game(self, deleted_idx):
         print("delete game")
-        game_table = table.Table("game_info")
+        self.__game_manager.game_list.pop(deleted_idx)
+        '''game_table = table.Table("game_info")
         game_table.pop(deleted_idx)
         game_table.save_file()
+        '''
 
         self.__game_manage_ui.set_game_table()
 

@@ -133,6 +133,7 @@ class Account_Manager():
                 self.__init_ui.init_game_manage_btn.setEnabled(True)
                 self.__init_ui.init_signup_btn.setEnabled(False)
                 self.__login_account = Admin.Admin(self.__init_ui, self.__init_window)
+                self.__login_account.game_manager = self.__gm
 
             else:
                 self.__init_ui.init_bet_btn.setEnabled(True)

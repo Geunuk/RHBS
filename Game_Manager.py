@@ -1,5 +1,6 @@
 #import Member
 #import Admin
+import datetime
 from ui import dialog, error, member_info as mem_info,game_status_show,betting_result
 from db import member_info, table
 import Game
@@ -50,7 +51,15 @@ class Game_Manager:
         self.__horse_list = horse_list
 
     def check_game_finish(self):
-        ...
+        print("check game finished")
+        now = datetime.datetime.now().replace(second=0)
+        for game in self.__game_list:
+            if game.proceeding == False and game.start_time.replace(second=0) <= now:
+                game.proceeding = True
+                game.decide_result()
+                game.calc_dividend()
+
+
 
     def init_game(self):
         print("게임 객체 생성하자")

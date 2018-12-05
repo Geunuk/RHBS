@@ -14,10 +14,10 @@ class Ui_Dialog(object):
         self.__gm = game_manager
         self.__init_ui = init_ui
         self.__dialog = None
-        self.__currentidx = current_idx
-        self.__idx =None
+        self.__current_idx = current_idx
 
     def setupUi(self, Dialog):
+        self.__dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(380,400)
         Dialog.setFixedSize(380,400)
@@ -54,13 +54,14 @@ class Ui_Dialog(object):
 
     def set_game_table(self):
         print("set game table")
-        game_table= table.Table("game_info")
-        self.__idx = game_table[self.__currentidx]
+        #game_table= table.Table("game_info")
+        game = self.__gm.game_list[self.__current_idx]
+        print(1)
         self.tableWidget.setRowCount(5)
         for row in range(5):
             item = QtWidgets.QTableWidgetItem(str(row + 1))
             self.tableWidget.setItem(row, 0, item)
-            item = QtWidgets.QTableWidgetItem(self.__idx.horses[self.__idx.result[row]].name)
+            item = QtWidgets.QTableWidgetItem(game.horses[game.result[row]].name)
             self.tableWidget.setItem(row, 1, item)
 
     def retranslateUi(self, Dialog):
@@ -80,14 +81,10 @@ class Ui_Dialog(object):
 
     def exit_btn_clicked(self):
         print("종료버튼")
-        self.__gm.game_result_exit()
+        self.__dialog.close()
 
 if __name__ == "__main__":
     import sys
-
-    libpaths = QtWidgets.QApplication.libraryPaths()
-    libpaths.append("C:\\Users\서강휘\AppData\Local\Programs\Python\Python37\Lib\site-packages\PyQt5\Qt\plugins")
-    QtWidgets.QApplication.setLibraryPaths(libpaths)
 
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()

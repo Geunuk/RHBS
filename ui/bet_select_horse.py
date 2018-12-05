@@ -17,6 +17,15 @@ class Ui_Dialog(object):
         self.__idx = choice_idx
         self.__game_table = None
         self.__game = None
+        self.__game_manager = None
+
+    @property
+    def game_manager(self):
+        return self.__game_manager
+
+    @game_manager.setter
+    def game_manager(self, game_manager):
+        self.__game_manager = game_manager
 
     def setupUi(self, Dialog):
         self.__dialog = Dialog
@@ -73,25 +82,27 @@ class Ui_Dialog(object):
 
     def set_horse_table(self):
         print("set horse table")
-        self.__game_table = table.Table("game_info")
-        self.__game = self.__game_table[self.__idx]
+        #self.__game_table = table.Table("game_info")
+        #self.__game = self.__game_table[self.__idx]
+        game = self.__game_manager.game_list[self.__idx]
         #print(self.__idx)
         self.horse_table.setRowCount(5)
         for row in range(5):
-            item = QtWidgets.QTableWidgetItem(self.__game.horses[row].name)
+            item = QtWidgets.QTableWidgetItem(game.horses[row].name)
             self.horse_table.setItem(row, 0, item)
-            item = QtWidgets.QTableWidgetItem(self.__game.horses[row].feature)
+            item = QtWidgets.QTableWidgetItem(game.horses[row].feature)
             self.horse_table.setItem(row, 1, item)
-            item = QtWidgets.QTableWidgetItem(str(self.__game.dividend_rate[row]))
+            item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[row]))
             self.horse_table.setItem(row, 2, item)
 
     def betting_btn_clicked(self):
         print("betting btn clicked")
+        game = self.__game_manager.game_list[self.__idx]
         choice_idx = self.horse_table.currentRow()
         bet_point = self.input_point.text()
         pw = self.input_pw.text()
-        horse_name = self.__game.horses[choice_idx].name
-        game_id = self.__game.game_id
+        horse_name = game.horses[choice_idx].name
+        game_id = game.game_id
 
         self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
 

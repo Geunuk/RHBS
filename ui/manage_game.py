@@ -17,6 +17,15 @@ class Ui_Dialog(object):
         self.__admin = admin
         self.__init_ui = init_ui
         self.__dialog = None
+        self.__gm = None
+
+    @property
+    def game_manager(self):
+        return self.__gm
+
+    @game_manager.setter
+    def game_manager(self, game_manager):
+        self.__gm = game_manager
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -71,10 +80,11 @@ class Ui_Dialog(object):
 
     def set_game_table(self):
         print("set game table")
-        game_table= table.Table("game_info")
+        #game_table= table.Table("game_info")
+        game_table = self.__gm.game_list
         self.present_game_table.setRowCount(len(game_table))
         for row, game in enumerate(game_table):
-            item = QtWidgets.QTableWidgetItem(str(game.game_id))
+            item = QtWidgets.QTableWidgetItem(str(game.id))
             self.present_game_table.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
             self.present_game_table.setItem(row, 1, item)

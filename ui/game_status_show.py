@@ -22,6 +22,7 @@ class Ui_Dialog(object):
         self.__error_ui = None
 
     def setupUi(self, Dialog):
+        self.__dialog = Dialog
         Dialog.setObjectName("경기 상황 확인")
         Dialog.resize(778,600)
         Dialog.setFixedSize(778,600)
@@ -68,7 +69,7 @@ class Ui_Dialog(object):
 
     def exit_btn_clicked(self):
         print("종료버튼")
-        self.__gm.game_status_exit()
+        self.__dialog.close()
 
     def show_error_box(self, prev_dialog, msg):
         print("show error box")
@@ -87,13 +88,11 @@ class Ui_Dialog(object):
         print(self.__dialog)
 
         self.__dialog.setEnabled(False)
-        print(self.__game_table[current_idx])
+        print(self.__gm.game_list[current_idx])
 
-        if self.__game_table[current_idx].proceeding == True:
-            print("1")
+        if self.__gm.game_list[current_idx].proceeding == True:
             self.__game_result_show_Dialog = dialog.Dialog_Modified(self.__dialog)
-            print("2")
-            self.__game_result_show_ui = game_result_show.Ui_Dialog(self, self.__init_ui,current_idx)
+            self.__game_result_show_ui = game_result_show.Ui_Dialog(self.__gm, self.__init_ui,current_idx)
 
             self.__game_result_show_ui.setupUi(self.__game_result_show_Dialog)
             self.__game_result_show_Dialog.show()
@@ -101,20 +100,21 @@ class Ui_Dialog(object):
             self.__dialog.setEnabled(False)
             self.show_error_box(self.__dialog, "경기 종료 전입니다.")
 
-    def game_result_exit(self):
-        self.__game_result_show_Dialog.close()
-
     def set_game_table(self):
         print("set game table")
-        self.__game_table = table.Table("game_info")
-        self.tableWidget.setRowCount(len(self.__game_table))
+        #self.__game_table = table.Table("game_info")
+        self.tableWidget.setRowCount(len(self.__gm.game_list))
 
-        for row, game in enumerate(self.__game_table):
-            item = QtWidgets.QTableWidgetItem(str(game.game_id))
+        for row, game in enumerate(self.__gm.game_list):
+            item = QtWidgets.QTableWidgetItem(str(game.id))
             self.tableWidget.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
             self.tableWidget.setItem(row, 1, item)
-            item = QtWidgets.QTableWidgetItem(str(game.proceeding))
+            if(game.proceeding == True):
+                msg = "경기 종료"
+            else :
+                msg = "경기 시작전"
+            item = QtWidgets.QTableWidgetItem(msg)
             self.tableWidget.setItem(row, 2, item)
             item = QtWidgets.QTableWidgetItem(str(game.dividend_rate))
             self.tableWidget.setItem(row, 3, item)

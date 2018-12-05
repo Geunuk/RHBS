@@ -10,10 +10,19 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from db import table
 
 class Ui_Dialog(object):
-    def __init__(self, game_manager, init_ui):
-        self.__game_manager = game_manager
+    def __init__(self, member, init_ui):
+        self.__member = member
         self.__init_ui = init_ui
         self.__dialog = None
+        self.__game_manager = None
+
+    @property
+    def game_manager(self):
+        return self.__game_manager
+
+    @game_manager.setter
+    def game_manager(self, game_manager):
+        self.__game_manager = game_manager
 
     def setupUi(self, Dialog):
         self.__dialog = Dialog
@@ -59,60 +68,73 @@ class Ui_Dialog(object):
     def set_betting_table(self):
         print("set betting table")
         betting_table = table.Table("betting_info")
-        # print(self.__idx)
         self.betting_table.setRowCount(len(betting_table))
-        '''for game in self.__game_manager.game_list:
-            for row,bet_info in enumerate(game.betting_info):
-                idx = 0
-                for r,horse in enumerate(game.horses):
-                    if(bet_info.horse_name == horse.name):
-                        idx = r
-                item = QtWidgets.QTableWidgetItem(game.id)
-                self.betting_table.setItem(row, 0, item)
-                item = QtWidgets.QTableWidgetItem(bet_info.horse_name)
-                self.betting_table.setItem(row, 1, item)
-                item = QtWidgets.QTableWidgetItem()
-                self.betting_table.setItem(row, 2, item)
-                item = QtWidgets.QTableWidgetItem()
-                self.betting_table.setItem(row, 3, item)
-                item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[idx]))
-                self.betting_table.setItem(row, 4, item)
-                item = QtWidgets.QTableWidgetItem(bet_info.bet_money)
-                self.betting_table.setItem(row, 5, item)
-                item = QtWidgets.QTableWidgetItem(str(bet_info.bet_money * 3))
-                self.betting_table.setItem(row, 6, item)'''
-
-        for row,bet_info in enumerate(betting_table):
-            idx = 0
-            for game in self.__game_manager.game_list:
-                if(game.id == bet_info.game_id):
+        i = 0
+        for game in self.__game_manager.game_list:
+            for bet_info in game.betting_info:
+                print(1)
+                if(self.__member.id == bet_info.member_id):
+                    print(2)
                     for r, horse in enumerate(game.horses):
                         if (bet_info.horse_name == horse.name):
                             idx = r
+                    #print(idx)
                     bet_money = int(bet_info.bet_money)
                     item = QtWidgets.QTableWidgetItem(bet_info.game_id)
-                    self.betting_table.setItem(row, 0, item)
+                    self.betting_table.setItem(i, 0, item)
                     item = QtWidgets.QTableWidgetItem(bet_info.horse_name)
-                    self.betting_table.setItem(row, 1, item)
+                    self.betting_table.setItem(i, 1, item)
                     re = None
-                    if(game.proceeding == True):
+                    if (game.proceeding == True):
                         msg = "경기 종료"
-                        for r1, res in enumerate(game.result):
-                            if (res == idx):
-                                re = r1
+                        re = game.result.index(idx)
                         re += 1
                     else:
                         msg = "경기 전"
                     item = QtWidgets.QTableWidgetItem(msg)
-                    self.betting_table.setItem(row, 2, item)
+                    self.betting_table.setItem(i, 2, item)
                     item = QtWidgets.QTableWidgetItem(str(re))
-                    self.betting_table.setItem(row, 3, item)
+                    self.betting_table.setItem(i, 3, item)
                     item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[idx]))
-                    self.betting_table.setItem(row, 4, item)
+                    self.betting_table.setItem(i, 4, item)
                     item = QtWidgets.QTableWidgetItem(bet_info.bet_money)
-                    self.betting_table.setItem(row, 5, item)
-                    item = QtWidgets.QTableWidgetItem(str(int(bet_money*game.dividend_rate[idx])))
-                    self.betting_table.setItem(row, 6, item)
+                    self.betting_table.setItem(i, 5, item)
+                    item = QtWidgets.QTableWidgetItem(str(int(bet_money * game.dividend_rate[idx])))
+                    self.betting_table.setItem(i, 6, item)
+                    i += 1
+
+        '''for row,bet_info in enumerate(betting_table):
+            idx = 0
+            if(self.__member.id == bet_info.member_id):
+                for game in self.__game_manager.game_list:
+                    if(game.id == bet_info.game_id):
+                        for r, horse in enumerate(game.horses):
+                            if (bet_info.horse_name == horse.name):
+                                idx = r
+                        bet_money = int(bet_info.bet_money)
+                        item = QtWidgets.QTableWidgetItem(bet_info.game_id)
+                        self.betting_table.setItem(row, 0, item)
+                        item = QtWidgets.QTableWidgetItem(bet_info.horse_name)
+                        self.betting_table.setItem(row, 1, item)
+                        re = None
+                        if(game.proceeding == True):
+                            msg = "경기 종료"
+                            for r1, res in enumerate(game.result):
+                                if (res == idx):
+                                    re = r1
+                            re += 1
+                        else:
+                            msg = "경기 전"
+                        item = QtWidgets.QTableWidgetItem(msg)
+                        self.betting_table.setItem(row, 2, item)
+                        item = QtWidgets.QTableWidgetItem(str(re))
+                        self.betting_table.setItem(row, 3, item)
+                        item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[idx]))
+                        self.betting_table.setItem(row, 4, item)
+                        item = QtWidgets.QTableWidgetItem(bet_info.bet_money)
+                        self.betting_table.setItem(row, 5, item)
+                        item = QtWidgets.QTableWidgetItem(str(int(bet_money*game.dividend_rate[idx])))
+                        self.betting_table.setItem(row, 6, item)'''
 
     def ok_btn_clicked(self):
         print("ok btn clicked")

@@ -17,6 +17,15 @@ class Ui_Dialog(object):
         self.__init_window = init_window
         self.__dialog = None
         self.__game_table = None
+        self.__game_manager = None
+
+    @property
+    def game_manager(self):
+        return self.__game_manager
+
+    @game_manager.setter
+    def game_manager(self, game_manager):
+        self.__game_manager = game_manager
 
     def setupUi(self, Dialog):
         self.__dialog = Dialog
@@ -51,12 +60,13 @@ class Ui_Dialog(object):
         print("game choice")
         choice_idx = self.game_table.currentRow()
         print("show betting horse box")
-        if(self.__game_table[choice_idx].proceeding == False):
+        if(self.__game_manager.game_list[choice_idx].proceeding == False):
             main_window = self.__init_ui.main_window
-            main_window.setEnabled(False)
+            self.__dialog.setEnabled(False)
 
-            self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__init_window)
+            self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__dialog)
             self.__bet_select_horse_ui = bet_select_horse.Ui_Dialog(self.__member, self.__init_ui,choice_idx)
+            self.__bet_select_horse_ui.game_manager = self.__game_manager
             self.__bet_select_horse_ui.setupUi(self.__bet_select_horse_Dialog)
             self.__bet_select_horse_Dialog.show()
         else :
@@ -72,10 +82,10 @@ class Ui_Dialog(object):
 
     def set_game_table(self):
         print("set game table")
-        self.__game_table = table.Table("game_info")
-        self.game_table.setRowCount(len(self.__game_table))
-        for row, game in enumerate(self.__game_table):
-            item = QtWidgets.QTableWidgetItem(str(game.game_id))
+        #self.__game_table = table.Table("game_info")
+        self.game_table.setRowCount(len(self.__game_manager.game_list))
+        for row, game in enumerate(self.__game_manager.game_list):
+            item = QtWidgets.QTableWidgetItem(str(game.id))
             self.game_table.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
             self.game_table.setItem(row, 1, item)

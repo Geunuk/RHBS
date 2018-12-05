@@ -16,7 +16,7 @@ class Betting_Info(Table):
             elif attr == "game_id":
                 result.append(self.game_id)
             elif attr == "horse_name":
-                result.append("horse_name")
+                result.append(self.horse_name)
             elif attr == "bet_money":
                 result.append(self.bet_money)
             else:
