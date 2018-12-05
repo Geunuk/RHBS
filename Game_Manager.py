@@ -2,7 +2,7 @@
 #import Admin
 import datetime
 from ui import dialog, error, member_info as mem_info,game_status_show,betting_result
-from db import member_info, table
+from db import table, game_info
 import Game
 
 class Game_Manager:
@@ -101,7 +101,15 @@ class Game_Manager:
         ...
 
     def save_game_file(self):
-        ...
+        print("끝났으니 게임 세이브하자~")
+        game_list = []
+        for g in self.__game_list:
+            game = game_info.Game_Info(g.id,g.start_time,g.result,g.horses,g.dividend_rate,g.proceeding)
+            game_list.append(game)
+        game_table = table.Table("game_info")
+        game_table.clear()
+        game_table.extend(game_list)
+        game_table.save_file()
 
     def read_betting_file(self):
         ...

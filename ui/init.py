@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         self.__gm = game_manager
         self.__main_window = None
         self.timer1 = QtCore.QTimer(self.__main_window)
-        self.timer1.start(1000 * 1)
+        self.timer1.start(100000 * 1)
         self.timer1.timeout.connect(self.timeout)
 
     def setupUi(self, MainWindow):

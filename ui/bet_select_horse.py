@@ -102,7 +102,7 @@ class Ui_Dialog(object):
         bet_point = self.input_point.text()
         pw = self.input_pw.text()
         horse_name = game.horses[choice_idx].name
-        game_id = game.game_id
+        game_id = game.id
 
         self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
 

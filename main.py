@@ -15,6 +15,7 @@ def main():
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = main_window.Main_window()
+    MainWindow.game_manager = gm
     init_ui = init.Ui_MainWindow(am, gm)
     init_ui.setupUi(MainWindow)
 
