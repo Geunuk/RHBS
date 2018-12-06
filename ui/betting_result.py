@@ -65,6 +65,8 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+        self.betting_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
     def set_betting_table(self):
         print("set betting table")
         betting_table = table.Table("betting_info")
@@ -95,7 +97,7 @@ class Ui_Dialog(object):
                     self.betting_table.setItem(i, 2, item)
                     item = QtWidgets.QTableWidgetItem(str(re))
                     self.betting_table.setItem(i, 3, item)
-                    item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[idx]))
+                    item = QtWidgets.QTableWidgetItem("{:.2f}".format(game.dividend_rate[idx]))
                     self.betting_table.setItem(i, 4, item)
                     item = QtWidgets.QTableWidgetItem(bet_info.bet_money)
                     self.betting_table.setItem(i, 5, item)
@@ -103,6 +105,8 @@ class Ui_Dialog(object):
                     self.betting_table.setItem(i, 6, item)
                     i += 1
 
+            if i != 0:
+                self.betting_table.selectRow(0)
         '''for row,bet_info in enumerate(betting_table):
             idx = 0
             if(self.__member.id == bet_info.member_id):

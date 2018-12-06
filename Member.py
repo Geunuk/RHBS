@@ -97,7 +97,7 @@ class Member():
         self.__bet_select_game_ui.setupUi(self.__bet_select_game_Dialog)
         self.__bet_select_game_Dialog.show()
 
-    def show_betting_result(self):
+    def show_betting_result_box(self):
         print("show_betting_result 호출")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
@@ -139,43 +139,6 @@ class Member():
         self.__error_ui.error_label.setText(msg)
         self.__error_Dialog.show()
 
-    def charge_point(self, charged_point):
-        print("charge point")
-        if self.isvalid_point(charged_point,"charge"):
-            self.__point = self.__point + int(charged_point)
-            self.__point_charge_Dialog.close()
-
-            member_table = table.Table("member_info")
-            popped_member = member_table.pop_row((self.id,))
-
-            popped_member.point = self.__point
-            member_table.append(popped_member)
-            member_table.save_file()
-
-        else:
-            print("charge point failed")
-            self.__point_charge_Dialog.setEnabled(False)
-            self.show_error_box(self.__point_charge_Dialog, "유효하지 않은 입력입니다")
-
-
-    def exchange_point(self, exchanged_point):
-        print("exchange point")
-        if self.isvalid_point(exchanged_point, "exchange"):
-            self.__point = self.__point - int(exchanged_point)
-            self.__point_exchange_Dialog.close()
-
-            member_table = table.Table("member_info")
-            popped_member = member_table.pop_row((self.id,))
-
-            popped_member.point = self.__point
-            member_table.append(popped_member)
-            member_table.save_file()
-
-        else:
-            print("exchange point failed")
-            self.__point_exchange_Dialog.setEnabled(False)
-            self.__ashow_error_box(self.__point_exchange_Dialog, "유효하지 않은 입력입니다")
-
     def bet(self,bet_point,pw,game_id,horse_name,dialog):
         print("betting")
         if (self.isvalid_point(bet_point,"exchange")) and (self.isvalid_pw(pw)):
@@ -191,8 +154,6 @@ class Member():
             info = betting_info.Betting_Info(self.__id,game_id,horse_name,bet_point)
             game_list = self.__gm.game_list
             for game in game_list:
-
-                #print(game.id)
                 if game_id == game.id:
                     game.betting_info.append(info)
                     game.calc_dividend_rate()
@@ -212,15 +173,48 @@ class Member():
             print("pw 입력 잘못")
             msg = "pw 입력이 잘못 되었습니다."
             self.show_error_box(dialog, msg)
-            #self.__bet_select_game_Dialog.setEnabled(False)
-            #self.__ashow_error_box(self.__bet_select_game_Dialog, "유효하지 않은 입력입니다")
+
+    def charge_point(self, charged_point):
+        print("charge point")
+        if self.isvalid_point(charged_point, "charge"):
+            self.__point = self.__point + int(charged_point)
+            self.__point_charge_Dialog.close()
+
+            member_table = table.Table("member_info")
+            popped_member = member_table.pop_row((self.id,))
+
+            popped_member.point = self.__point
+            member_table.append(popped_member)
+            member_table.save_file()
+
+        else:
+            print("charge point failed")
+            self.__point_charge_Dialog.setEnabled(False)
+            self.show_error_box(self.__point_charge_Dialog, "유효하지 않은 입력입니다")
+
+    def exchange_point(self, exchanged_point):
+        print("exchange point")
+        if self.isvalid_point(exchanged_point, "exchange"):
+            self.__point = self.__point - int(exchanged_point)
+            self.__point_exchange_Dialog.close()
+
+            member_table = table.Table("member_info")
+            popped_member = member_table.pop_row((self.id,))
+
+            popped_member.point = self.__point
+            member_table.append(popped_member)
+            member_table.save_file()
+
+        else:
+            print("exchange point failed")
+            self.__point_exchange_Dialog.setEnabled(False)
+            self.show_error_box(self.__point_exchange_Dialog, "유효하지 않은 입력입니다")
 
     def isvalid_pw(self,pw):
         if (self.__password == pw):
             return True
         else:
             return False
-
 
     def isvalid_point(self, changed_point, mode):
          try:
@@ -235,5 +229,3 @@ class Member():
 
          except ValueError:
              return False
-
-    #def bet(self):

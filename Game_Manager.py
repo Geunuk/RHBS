@@ -50,6 +50,24 @@ class Game_Manager:
     def horse_list(self, horse_list):
         self.__horse_list = horse_list
 
+    def show_game_status_box(self):
+        print("경기진행상황확인")
+        self.__init_window.setEnabled(False)
+        self.__game_status_show_Dialog = dialog.Dialog_Modified(self.__init_window)
+        self.__game_status_show_ui = game_status_show.Ui_Dialog(self, self.__init_ui, self.__init_window)
+        self.__game_status_show_ui.setupUi(self.__game_status_show_Dialog)
+        self.__game_status_show_Dialog.show()
+
+    def show_betting_result_box(self):
+        print("show_betting_result 호출")
+        main_window = self.__init_ui.main_window
+        main_window.setEnabled(False)
+
+        self.__betting_result_Dialog = dialog.Dialog_Modified(self.__init_window)
+        self.__betting_result_ui = betting_result.Ui_Dialog(self, self.__init_ui)
+        self.__betting_result_ui.setupUi(self.__betting_result_Dialog)
+        self.__betting_result_Dialog.show()
+
     def check_game_finish(self):
         print("check game finished")
         now = datetime.datetime.now().replace(second=0)
@@ -58,8 +76,6 @@ class Game_Manager:
                 game.proceeding = True
                 game.decide_result()
                 game.calc_dividend()
-
-
 
     def init_game(self):
         print("게임 객체 생성하자")
@@ -74,32 +90,6 @@ class Game_Manager:
             #game1.calc_dividend_rate()
             self.__game_list.append(game1)
 
-
-    def show_game_status(self):
-        print("경기진행상황확인")
-
-        self.__init_window.setEnabled(False)
-        self.__game_status_show_Dialog = dialog.Dialog_Modified(self.__init_window)
-        self.__game_status_show_ui = game_status_show.Ui_Dialog(self, self.__init_ui, self.__init_window)
-        self.__game_status_show_ui.setupUi(self.__game_status_show_Dialog)
-        self.__game_status_show_Dialog.show()
-
-    def game_status_exit(self):
-        self.__game_status_show_Dialog.close()
-
-    def show_betting_result(self):
-        print("show_betting_result 호출")
-        main_window = self.__init_ui.main_window
-        main_window.setEnabled(False)
-
-        self.__betting_result_Dialog = dialog.Dialog_Modified(self.__init_window)
-        self.__betting_result_ui = betting_result.Ui_Dialog(self, self.__init_ui)
-        self.__betting_result_ui.setupUi(self.__betting_result_Dialog)
-        self.__betting_result_Dialog.show()
-
-    def read_game_file(self):
-        ...
-
     def save_game_file(self):
         print("끝났으니 게임 세이브하자~")
         game_list = []
@@ -110,12 +100,3 @@ class Game_Manager:
         game_table.clear()
         game_table.extend(game_list)
         game_table.save_file()
-
-    def read_betting_file(self):
-        ...
-
-    def save_betting_file(self):
-        ...
-
-    def read_horse_file(self):
-        ...

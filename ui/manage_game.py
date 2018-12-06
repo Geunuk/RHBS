@@ -77,6 +77,7 @@ class Ui_Dialog(object):
         self.game_add_btn.clicked.connect(self.game_add_btn_clicked_connect)
         self.game_delete_btn.clicked.connect(self.game_delete_btn_clicked_connect)
         self.set_game_table()
+        self.present_game_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def set_game_table(self):
         print("set game table")
@@ -98,6 +99,9 @@ class Ui_Dialog(object):
             self.present_game_table.setItem(row, 5, item)
             item = QtWidgets.QTableWidgetItem(game.horses[4].name)
             self.present_game_table.setItem(row, 6, item)
+
+        if len(game_table) != 0:
+            self.present_game_table.selectRow(0)
 
     def game_add_btn_clicked_connect(self):
         print("game add btn clicked connect")

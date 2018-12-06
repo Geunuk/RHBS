@@ -25,7 +25,7 @@ class Ui_Dialog(object):
         self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(Dialog)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         self.tableWidget.resize(380,400)
 
@@ -33,6 +33,8 @@ class Ui_Dialog(object):
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
 
 
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -51,6 +53,7 @@ class Ui_Dialog(object):
         self.pushButton.clicked.connect(self.exit_btn_clicked)
 
         self.set_game_table()
+        self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def set_game_table(self):
         print("set game table")
@@ -63,6 +66,11 @@ class Ui_Dialog(object):
             self.tableWidget.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(game.horses[game.result[row]].name)
             self.tableWidget.setItem(row, 1, item)
+            item = QtWidgets.QTableWidgetItem("{:.2f}".format(game.dividend_rate[game.result[row]]))
+            self.tableWidget.setItem(row, 2, item)
+
+        if len(game.horses) != 0:
+            self.tableWidget.selectRow(0)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -71,6 +79,8 @@ class Ui_Dialog(object):
         item.setText(_translate("Dialog", "순위"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("Dialog", "말"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("Dialog", "배당률"))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
 

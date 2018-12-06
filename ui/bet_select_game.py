@@ -55,6 +55,7 @@ class Ui_Dialog(object):
 
         self.set_game_table()
         self.choice_game_btn.clicked.connect(self.choice_game_btn_clicked_connect)
+        self.game_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def choice_game_btn_clicked_connect(self):
         print("game choice")
@@ -89,6 +90,9 @@ class Ui_Dialog(object):
             self.game_table.setItem(row, 0, item)
             item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
             self.game_table.setItem(row, 1, item)
+
+        if len(self.__game_manager.game_list) != 0:
+            self.game_table.selectRow(0)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

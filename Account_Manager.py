@@ -4,9 +4,9 @@ from ui import dialog, signup, login, error, member_info as mem_info
 from db import member_info, table
 
 class Account_Manager():
-    def __init__(self,gm):
+    def __init__(self):
         self.__login_account = None
-        self.__gm = gm
+        self.__gm = None
         self.__init_ui = None
         self.__init_window = None
         self.__signup_Dialog = None
@@ -21,6 +21,14 @@ class Account_Manager():
     @property
     def login_account(self):
         return self.__login_account
+
+    @property
+    def gm(self):
+        return self.__gm
+
+    @gm.setter
+    def gm(self, gm):
+        self.__gm = gm
 
     @property
     def init_ui(self):
@@ -121,6 +129,7 @@ class Account_Manager():
         if  valid_result == 0:
             self.__login_Dialog.close()
 
+            self.__init_ui.login_msg.setText(id + "님 환영합니다!")
             self.__init_ui.init_login_btn.setText("로그아웃")
             self.__init_ui.init_signup_btn.setText("회원정보확인")
 
@@ -164,6 +173,7 @@ class Account_Manager():
 
     def logout(self):
         print("logout")
+        self.__init_ui.login_msg.setText("")
         self.__login_account = None
 
     def change_member_info(self, pw1, pw2, anum, email, pnum):
@@ -199,12 +209,6 @@ class Account_Manager():
             self.__login_Dialog.setEnabled(False)
             self.show_error_box(self.__member_info_Dialog, "패스워드가 일치하지 않습니다")
             return False
-
-    def save_member_info(self):
-        ...
-
-    def return_dividend(self):
-        ...
 
     def isvalid_login(self, id, pw):
         """

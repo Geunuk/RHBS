@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         self.__gm = game_manager
         self.__main_window = None
         self.timer1 = QtCore.QTimer(self.__main_window)
-        self.timer1.start(100000 * 1)
+        self.timer1.start(10000 * 1)
         self.timer1.timeout.connect(self.timeout)
 
     def setupUi(self, MainWindow):
@@ -106,10 +106,14 @@ class Ui_MainWindow(object):
         self.init_game_manage_btn.setObjectName("init_game_manage_btn")
         self.verticalLayout.addWidget(self.init_game_manage_btn)
         self.gridLayout.addLayout(self.verticalLayout, 1, 0, 2, 1)
-        self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView.setEnabled(True)
-        self.graphicsView.setObjectName("graphicsView")
-        self.gridLayout.addWidget(self.graphicsView, 2, 1, 1, 1)
+
+        self.img_label = QtWidgets.QLabel(MainWindow)
+        self.img_label.setObjectName("img_label")
+        pixmap =  QtGui.QPixmap('ui/init_image.jpg')
+        pixmap = pixmap.scaledToHeight(500)
+        self.img_label.setPixmap(pixmap)
+        self.gridLayout.addWidget(self.img_label, 2, 1, 1, 1)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -173,10 +177,10 @@ class Ui_MainWindow(object):
     def init_bet_result_btn_clicked(self):
         print("show bet result")
         logged_in_member = self.__am.login_account
-        logged_in_member.show_betting_result()
+        logged_in_member.show_betting_result_box()
 
     def init_game_status_btn_clicked(self):
-        self.__gm.show_game_status()
+        self.__gm.show_game_status_box()
 
     def init_charge_point_btn_clicked(self):
         print("init charge point btn clicked")

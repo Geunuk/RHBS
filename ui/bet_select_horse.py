@@ -80,6 +80,8 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+        self.horse_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+
     def set_horse_table(self):
         print("set horse table")
         #self.__game_table = table.Table("game_info")
@@ -94,6 +96,9 @@ class Ui_Dialog(object):
             self.horse_table.setItem(row, 1, item)
             item = QtWidgets.QTableWidgetItem(str(game.dividend_rate[row]))
             self.horse_table.setItem(row, 2, item)
+
+        if len(game.horses) != 0:
+            self.horse_table.selectRow(0)
 
     def betting_btn_clicked(self):
         print("betting btn clicked")

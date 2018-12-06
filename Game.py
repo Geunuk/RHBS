@@ -1,3 +1,5 @@
+import random
+
 from db import table
 
 class Game():
@@ -67,38 +69,35 @@ class Game():
     def dividend_rate(self, dividend_rate):
         self.__dividend_rate = dividend_rate
 
+    def decide_result(self):
+        self.__result = list(range(5))
+        print(self.__result)
+        random.shuffle(self.__result)
+        print(self.__result)
+
     def calc_dividend_rate(self):
         print("calc_dividend_rate")
         sum = 0
         a = [0,0,0,0,0]
         for info in self.__betting_info:
-            #print(info.bet_money)
             sum += int(info.bet_money)
             for row,horse in enumerate(self.__horses):
-                #print(horse.name)
                 if(horse.name == info.horse_name):
                     a[row] += int(info.bet_money)
         for i in range(5):
             if(a[i] != 0):
                 self.__dividend_rate[i] = sum/a[i]
-                #print(self.__dividend_rate[i])
-        self.save_game_info()
+        #self.save_game_info()
 
-    def isvalid_proceeding(self):
-        ...
-
-    def add_betting_info(self, id, horse, point):
-        ...
-
-    def decide_result(self):
-        self.__result = [0,1,2,3,4]
-
-#   경기 종료 -> 멤버에게 넘겨줄 포인트 계산
+    # 경기 종료 -> 멤버에게 넘겨줄 포인트 계산
     def calc_dividend(self):
         print("포인트를 되돌려주자")
         member_table = table.Table("member_info")
+        print("1")
         idx = self.__result[0]
+        print(self.__betting_info)
         for info in self.__betting_info:
+            print("3")
             if(info.horse_name == self.__horses[idx].name):
                 print("포인트 추가~~~")
                 popped_member = member_table.pop_row((info.member_id,))
@@ -106,15 +105,4 @@ class Game():
                 popped_member.point += int(int(info.bet_money) * self.__dividend_rate[idx])
                 member_table.append(popped_member)
                 member_table.save_file()
-
-
-    def show_game_result(self):
-        ...
-
-    def save_game_info(self):
-        game_table = table.Table("game_info")
-        popped_game = game_table.pop_row((self.__id,))
-
-        popped_game.dividend_rate = self.__dividend_rate
-        game_table.append(popped_game)
-        game_table.save_file()
+        print("4")
