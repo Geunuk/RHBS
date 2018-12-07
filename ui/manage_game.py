@@ -114,7 +114,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "게임 관리"))
+        Dialog.setWindowTitle(_translate("Dialog", "경기 관리"))
         item = self.present_game_table.horizontalHeaderItem(0)
         item.setText(_translate("Dialog", "경기"))
         item = self.present_game_table.horizontalHeaderItem(1)
