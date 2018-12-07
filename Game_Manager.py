@@ -9,6 +9,7 @@ class Game_Manager:
     def __init__(self):
         self.__game_list = []
         self.__horse_list = None
+        self.__login_account = None
         self.__init_ui = None
         self.__init_window = None
         self.__betting_result_Dialog = None
@@ -25,6 +26,14 @@ class Game_Manager:
     @init_ui.setter
     def init_ui(self, init_ui):
         self.__init_ui = init_ui
+
+    @property
+    def login_account(self):
+        return self.__login_account
+
+    @login_account.setter
+    def login_account(self, login_account):
+        self.__login_account = login_account
 
     @property
     def init_window(self):
@@ -74,6 +83,7 @@ class Game_Manager:
         for game in self.__game_list:
             if game.proceeding == False and game.start_time.replace(second=0) <= now:
                 game.proceeding = True
+                game.login_account = self.__login_account
                 game.decide_result()
                 game.calc_dividend()
 

@@ -90,9 +90,14 @@ class Admin():
 
     def delete_game(self, deleted_idx):
         print("delete game")
-
-        self.__game_manager.game_list.pop(deleted_idx)
-        self.__game_manage_ui.set_game_table()
+        valid_result = self.isvalid_delete(self.__game_manager.game_list[deleted_idx])
+        if(valid_result):
+            self.__game_manager.game_list.pop(deleted_idx)
+            self.__game_manage_ui.set_game_table()
+        else:
+            print("not valid register")
+            self.__game_manage_Dialog.setEnabled(False)
+            self.show_error_box(self.__game_manage_Dialog, "종료되지 않은 경기 입니다.")
 
     def isvalid_register(self, game_id, start_time, horse_name_list):
         """
@@ -104,9 +109,12 @@ class Admin():
         """
         print("isvalid_register")
 
-        game_table = table.Table("game_info")
+        '''game_table = table.Table("game_info")
         game_table.load_file()
-        game_id_list = [x[0] for x in game_table.select_all_row(('game_id',))]
+        game_id_list = [x[0] for x in game_table.select_all_row(('game_id',))]'''
+        game_id_list = []
+        for game in self.__game_manager.game_list:
+            game_id_list.append(game.id)
 
         if "" in [game_id, start_time]:
             return 1
@@ -119,5 +127,8 @@ class Admin():
         else:
             return 0
 
-    def isvalid_delete(self):
-        return True
+    def isvalid_delete(self,game):
+        if(game.proceeding == True):
+            return True
+        else :
+            return False

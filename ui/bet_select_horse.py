@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from db import table
+from ui import dialog, error
 
 class Ui_Dialog(object):
     def __init__(self, member, init_ui,choice_idx):
@@ -108,8 +109,19 @@ class Ui_Dialog(object):
         pw = self.input_pw.text()
         horse_name = game.horses[choice_idx].name
         game_id = game.id
+        if(game.proceeding == False):
+            self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
+        else :
+            print("show error box")
+            main_window = self.__init_ui.main_window
+            main_window.setEnabled(False)
 
-        self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
+            self.__error_Dialog = dialog.Dialog_Modified(self.__dialog)
+            self.__error_ui = error.Ui_Dialog(self, self.__dialog)
+            self.__error_ui.setupUi(self.__error_Dialog)
+            self.__error_ui.error_label.setText("종료된 경기입니다.")
+            self.__error_Dialog.show()
+            self.__dialog.close()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

@@ -11,6 +11,7 @@ class Game():
         self.__start_time = start_time
         self.__betting_info = betting_info
         self.__dividend_rate = dividend_rate
+        self.__login_account = None
 
     @property
     def id(self):
@@ -69,6 +70,14 @@ class Game():
     def dividend_rate(self, dividend_rate):
         self.__dividend_rate = dividend_rate
 
+    @property
+    def login_account(self):
+        return self.__login_account
+
+    @login_account.setter
+    def login_account(self, login_account):
+        self.__login_account = login_account
+
     def decide_result(self):
         self.__result = list(range(5))
         print(self.__result)
@@ -105,4 +114,7 @@ class Game():
                 popped_member.point += int(int(info.bet_money) * self.__dividend_rate[idx])
                 member_table.append(popped_member)
                 member_table.save_file()
+                if(type(self.__login_account == 'Member.Member')):
+                    self.__login_account.point += int(int(info.bet_money) * self.__dividend_rate[idx])
+
         print("4")

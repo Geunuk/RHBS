@@ -156,6 +156,9 @@ class Account_Manager():
                                                      , member_info[4], member_info[5]
                                                      , member_info[6], int(member_info[7])
                                                      , self.__init_ui, self.__init_window,self.__gm)
+                self.__gm.login_account = self.__login_account
+                if(type(self.__login_account == 'Member.Member')):
+                    print(type(self.__login_account))
 
         elif valid_result == 1:
             print("not valid login")
@@ -175,6 +178,7 @@ class Account_Manager():
         print("logout")
         self.__init_ui.login_msg.setText("")
         self.__login_account = None
+        self.__gm.login_account = None
 
     def change_member_info(self, pw1, pw2, anum, email, pnum):
         print("change member info")

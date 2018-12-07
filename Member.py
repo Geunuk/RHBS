@@ -152,8 +152,7 @@ class Member():
             member_table.append(popped_member)
             member_table.save_file()
             info = betting_info.Betting_Info(self.__id,game_id,horse_name,bet_point)
-            game_list = self.__gm.game_list
-            for game in game_list:
+            for game in self.__gm.game_list:
                 if game_id == game.id:
                     game.betting_info.append(info)
                     game.calc_dividend_rate()
