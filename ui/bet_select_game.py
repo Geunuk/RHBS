@@ -76,12 +76,17 @@ class Ui_Dialog(object):
             self.__error_Dialog.show()
 
     def set_game_table(self):
-        self.game_table.setRowCount(len(self.__game_manager.game_list))
+        i = 0
         for row, game in enumerate(self.__game_manager.game_list):
-            item = QtWidgets.QTableWidgetItem(str(game.id))
-            self.game_table.setItem(row, 0, item)
-            item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
-            self.game_table.setItem(row, 1, item)
+            if (game.proceeding == False):
+                i += 0
+        self.game_table.setRowCount(i)
+        for row, game in enumerate(self.__game_manager.game_list):
+            if (game.proceeding == False):
+                item = QtWidgets.QTableWidgetItem(str(game.id))
+                self.game_table.setItem(row, 0, item)
+                item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
+                self.game_table.setItem(row, 1, item)
 
         if len(self.__game_manager.game_list) != 0:
             self.game_table.selectRow(0)
