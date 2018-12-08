@@ -18,6 +18,7 @@ class Ui_Dialog(object):
         self.__dialog = None
         self.__game_table = None
         self.__game_manager = None
+        self.__idx = []
 
     @property
     def game_manager(self):
@@ -61,7 +62,7 @@ class Ui_Dialog(object):
     def choice_game_btn_clicked_connect(self):
         print("경기 선택")
         self.__dialog.setEnabled(False)
-        choice_idx = self.game_table.currentRow()
+        choice_idx = self.__idx[self.game_table.currentRow()]
         if(self.__game_manager.game_list[choice_idx].proceeding == False):
             self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__dialog)
             self.__bet_select_horse_ui = bet_select_horse.Ui_Dialog(self.__member, self.__init_ui,choice_idx)
@@ -77,13 +78,15 @@ class Ui_Dialog(object):
 
     def set_game_table(self):
         i = 0
+        self.__idx = []
         for game in self.__game_manager.game_list:
             if (game.proceeding == False):
                 i += 1
         self.game_table.setRowCount(i)
         i=0
-        for game in self.__game_manager.game_list:
+        for row,game in enumerate(self.__game_manager.game_list):
             if (game.proceeding == False):
+                self.__idx.append(row)
                 item = QtWidgets.QTableWidgetItem(str(game.id))
                 self.game_table.setItem(i, 0, item)
                 item = QtWidgets.QTableWidgetItem(game.start_time.strftime("%Y-%m-%d %H:%M:%S"))
