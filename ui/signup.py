@@ -88,7 +88,7 @@ class Ui_Dialog(object):
         self.signup_ok_btn.clicked.connect(self.signup_ok_btn_clicked_connect)
 
     def signup_ok_btn_clicked_connect(self):
-        print("signup_ok_btn_clicked")
+        print("회원가입 확인 버튼 클릭")
         id = self.input_id.text()
         pw = self.input_pw.text()
         pw_repeat = self.input_pw_repeat.text()

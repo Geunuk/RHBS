@@ -66,11 +66,10 @@ class Ui_Dialog(object):
         self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def exit_btn_clicked(self):
-        print("종료버튼")
         self.__dialog.close()
 
     def show_error_box(self, prev_dialog, msg):
-        print("show error box")
+        print("에러 박스 표시")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
 
@@ -81,12 +80,9 @@ class Ui_Dialog(object):
         self.__error_Dialog.show()
 
     def game_result_btn_clicked(self):
+        print("경기 결과 버튼 클릭")
         current_idx = self.tableWidget.currentRow()
-        print("게임 결과 버튼 클릭")
-        print(self.__dialog)
-
         self.__dialog.setEnabled(False)
-        print(self.__gm.game_list[current_idx])
 
         if self.__gm.game_list[current_idx].proceeding == True:
             self.__game_result_show_Dialog = dialog.Dialog_Modified(self.__dialog)
@@ -99,9 +95,6 @@ class Ui_Dialog(object):
             self.show_error_box(self.__dialog, "경기 종료 전입니다.")
 
     def set_game_table(self):
-        print("set game tabl")
-
-        # self.__game_table = table.Table("game_info")
         self.tableWidget.setRowCount(len(self.__gm.game_list))
 
         for row, game in enumerate(self.__gm.game_list):
@@ -115,8 +108,6 @@ class Ui_Dialog(object):
                 msg = "경기 시작전"
             item = QtWidgets.QTableWidgetItem(msg)
             self.tableWidget.setItem(row, 2, item)
-        # item = QtWidgets.QTableWidgetItem("{:.2f}".format(game.dividend_rate[1]))
-        #  self.tableWidget.setItem(row, 3, item)
 
         if len(self.__gm.game_list) != 0:
             self.tableWidget.selectRow(0)

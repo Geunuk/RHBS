@@ -2,7 +2,6 @@ from db.table import Table
 
 class Member_Info(Table):
     def __init__(self, member_id, pw, name, ssn, anum, email, pnum,  point=0):
-        print("member info __init__")
         self.member_id = member_id
         self.password = pw
         self.name = name

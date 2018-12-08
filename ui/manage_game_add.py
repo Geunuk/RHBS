@@ -73,14 +73,10 @@ class Ui_Dialog(object):
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.input_horse4)
 
         now = datetime.datetime.now()
-        year, month, day = now.year, now.month, now.day
         hour, min, sec = now.hour, now.minute, now.second
-        #self.input_start_time.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(year, month, day)
-        #                                                          , QtCore.QTime(hour, min, sec)))
-
         self.input_start_time = QtWidgets.QDateTimeEdit(QtCore.QTime(hour, min, sec),Dialog)
-        #self.input_start_time = QtWidgets.QTimeEdit(Dialog)
         self.input_start_time.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+
         self.input_start_time.setObjectName("input_start_time")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_start_time)
         self.gridLayout.addLayout(self.formLayout, 0, 0, 1, 1)
@@ -91,11 +87,6 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        #now = datetime.datetime.now()
-        #year, month, day = now.year, now.month, now.day
-        #hour, min, sec = now.hour, now.minute, now.second
-        #self.input_start_time.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(year, month, day)
-        #                                                          , QtCore.QTime(hour, min, sec)))
         self.add_game_ok_btn.clicked.connect(self.add_game_ok_btn_clicked_connect)
         self.set_input_horse_combo_box()
 
@@ -108,7 +99,7 @@ class Ui_Dialog(object):
             combo.addItems(horses)
 
     def add_game_ok_btn_clicked_connect(self):
-        print("game add btn clicked connect")
+        print("확인 버튼 클릭")
         game_id = self.input_game_name.text()
         start_time = self.input_start_time.text()
 

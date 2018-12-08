@@ -56,10 +56,7 @@ class Ui_Dialog(object):
         self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def set_game_table(self):
-        print("set game table")
-        #game_table= table.Table("game_info")
         game = self.__gm.game_list[self.__current_idx]
-        print(1)
         self.tableWidget.setRowCount(5)
         for row in range(5):
             item = QtWidgets.QTableWidgetItem(str(row + 1))
@@ -90,7 +87,6 @@ class Ui_Dialog(object):
 
 
     def exit_btn_clicked(self):
-        print("종료버튼")
         self.__dialog.close()
 
 if __name__ == "__main__":

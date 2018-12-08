@@ -14,5 +14,4 @@ class Main_window(QtWidgets.QMainWindow):
         self.__game_manager = game_manager
 
     def closeEvent(self, QCloseEvent):
-        print("메인 윈도우가 닫혔다!")
         self.__game_manager.save_game_file()

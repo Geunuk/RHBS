@@ -119,6 +119,7 @@ class Ui_Dialog(object):
 
     def member_info_ok_btn_clicked_connect(self):
         if not self.modify_flag:
+            print("수정 버튼 클릭")
             self.__dialog.setWindowTitle("개인정보수정")
 
             self.pw_repeat_label = QtWidgets.QLabel(self.__dialog)
@@ -141,7 +142,7 @@ class Ui_Dialog(object):
             self.modify_flag = True
 
         else:
-
+            print("확인 버튼 클릭")
             pw1 = self.input_pw.text()
             pw2 = self.input_pw_repeat.text()
             anum = self.input_account_number.text()

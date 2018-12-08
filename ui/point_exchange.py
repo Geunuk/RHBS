@@ -84,7 +84,7 @@ class Ui_Dialog(object):
 
 
     def point_exchange_ok_btn_clicked_connect(self):
-        print("point exchange ok btn clicked")
+        print("확인 버튼 클릭")
         exchanged_point = self.input_point.text()
         self.__member.exchange_point(exchanged_point)
 

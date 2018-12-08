@@ -42,7 +42,7 @@ class Ui_Dialog(object):
         self.error_ok_btn.clicked.connect(self.error_ok_btn_clicked_connect)
 
     def error_ok_btn_clicked_connect(self):
-        print("error_ok_btn_clicked")
+        print("확인 버튼 클릭")
         self.__dialog.close()
 
     def retranslateUi(self, Dialog):

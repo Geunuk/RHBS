@@ -12,9 +12,6 @@ class Horse():
     def feature(self):
         return self.__feature
 
-    def calc_horse_rating(self):
-        ...
-
 if __name__ == "__main__":
     a = Horse("a", "123", 2000)
     c = Horse("b", "123", 2000)

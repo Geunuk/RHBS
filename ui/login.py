@@ -77,7 +77,7 @@ class Ui_Dialog(object):
         self.login_ok_btn.clicked.connect(self.login_ok_btn_clicked_connect)
 
     def login_ok_btn_clicked_connect(self):
-        print("login_ok_btn_clicked")
+        print("로그인 버튼 클릭")
         id = self.input_id.text()
         pw = self.input_pw.text()
         self.__am.login(id, pw)

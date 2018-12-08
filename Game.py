@@ -3,7 +3,7 @@ import random
 from db import table
 
 class Game():
-    def __init__(self, id, proceeding, result, horses, start_time, betting_info,dividend_rate):
+    def __init__(self, id, proceeding, result, horses, start_time, betting_info, dividend_rate):
         self.__id = id
         self.__proceeding = proceeding
         self.__result = result
@@ -20,7 +20,6 @@ class Game():
     @id.setter
     def id(self, id):
         self.__id = id
-
 
     @property
     def proceeding(self):
@@ -80,12 +79,9 @@ class Game():
 
     def decide_result(self):
         self.__result = list(range(5))
-        print(self.__result)
         random.shuffle(self.__result)
-        print(self.__result)
 
     def calc_dividend_rate(self):
-        print("calc_dividend_rate")
         sum = 0
         a = [0,0,0,0,0]
         for info in self.__betting_info:
@@ -96,25 +92,16 @@ class Game():
         for i in range(5):
             if(a[i] != 0):
                 self.__dividend_rate[i] = sum/a[i]
-        #self.save_game_info()
 
     # 경기 종료 -> 멤버에게 넘겨줄 포인트 계산
     def calc_dividend(self):
-        print("포인트를 되돌려주자")
         member_table = table.Table("member_info")
-        print("1")
         idx = self.__result[0]
-        print(self.__betting_info)
         for info in self.__betting_info:
-            print("3")
             if(info.horse_name == self.__horses[idx].name):
-                print("포인트 추가~~~")
                 popped_member = member_table.pop_row((info.member_id,))
-
                 popped_member.point += int(int(info.bet_money) * self.__dividend_rate[idx])
                 member_table.append(popped_member)
                 member_table.save_file()
                 if(type(self.__login_account == 'Member.Member')):
                     self.__login_account.point += int(int(info.bet_money) * self.__dividend_rate[idx])
-
-        print("4")

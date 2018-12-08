@@ -5,14 +5,15 @@ from db import table
 import Game
 
 class Admin():
-    def __init__(self, init_ui, init_window):
+    def __init__(self, gm, init_ui, init_window):
+        self.__game_manager = gm
+
         self.__init_ui = init_ui
         self.__init_window = init_window
         self.__game_manage_Dialog = None
         self.__game_manage_ui = None
         self.__manage_game_add_Dialog = None
         self.__manage_game_add_ui = None
-        self.__game_manager = None
 
     @property
     def game_manager(self):
@@ -23,7 +24,7 @@ class Admin():
         self.__game_manager = game_manager
 
     def show_manage_game_box(self):
-        print("show manage game box")
+        print("경기 관리 박스 표시")
         self.__init_window.setEnabled(False)
 
         self.__game_manage_Dialog = dialog.Dialog_Modified(self.__init_window)
@@ -33,7 +34,7 @@ class Admin():
         self.__game_manage_Dialog.show()
 
     def show_game_add_box(self):
-        print("show game add box")
+        print("경기 추가 박스 표시")
         self.__game_manage_Dialog.setEnabled(False)
 
         self.__manage_game_add_Dialog = dialog.Dialog_Modified(self.__game_manage_Dialog)
@@ -42,7 +43,7 @@ class Admin():
         self.__manage_game_add_Dialog.show()
 
     def show_error_box(self, prev_dialog, msg):
-        print("show error box")
+        print("에러 박스 표시")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
 
@@ -53,7 +54,7 @@ class Admin():
         self.__error_Dialog.show()
 
     def register_game(self, game_id, start_time, horse_name_list):
-        print("register game")
+        print("경기 추가")
 
         today = datetime.date.today()
         start_time = datetime.datetime.strptime(start_time, "%p %I:%M")
@@ -65,37 +66,34 @@ class Admin():
             horse_table = table.Table("horse_info")
             horse_info_list = []
             for horse_name in horse_name_list:
-                print(horse_name)
                 horse_info_list.append(horse_table.get_row((horse_name,)))
             new_game = Game.Game(game_id,False,[],horse_info_list,start_time,[],[1,1,1,1,1])
             self.__game_manager.game_list.append(new_game)
             self.__game_manage_ui.set_game_table()
 
         elif valid_result == 1:
-            print("not valid register")
             self.__manage_game_add_Dialog.setEnabled(False)
             self.show_error_box(self.__manage_game_add_Dialog, "빈 항목이 있습니다")
+
         elif valid_result == 2:
-            print("not valid register")
             self.__manage_game_add_Dialog.setEnabled(False)
             self.show_error_box(self.__manage_game_add_Dialog, "동일한 경기 이름이 존재합니다")
+
         elif valid_result == 3:
-            print("not valid register")
             self.__manage_game_add_Dialog.setEnabled(False)
             self.show_error_box(self.__manage_game_add_Dialog, "말이 중복됩니다")
+
         else:
-            print("not valid register")
             self.__manage_game_add_Dialog.setEnabled(False)
             self.show_error_box(self.__manage_game_add_Dialog, "경기 시간은 현재 시간보다 나중이어야 합니다")
 
     def delete_game(self, deleted_idx):
-        print("delete game")
+        print("경기 삭제")
         valid_result = self.isvalid_delete(self.__game_manager.game_list[deleted_idx])
         if(valid_result):
             self.__game_manager.game_list.pop(deleted_idx)
             self.__game_manage_ui.set_game_table()
         else:
-            print("not valid register")
             self.__game_manage_Dialog.setEnabled(False)
             self.show_error_box(self.__game_manage_Dialog, "종료되지 않은 경기 입니다.")
 
@@ -107,11 +105,6 @@ class Admin():
                   3 => duplicate horses
                   4 => duplicate ssn
         """
-        print("isvalid_register")
-
-        '''game_table = table.Table("game_info")
-        game_table.load_file()
-        game_id_list = [x[0] for x in game_table.select_all_row(('game_id',))]'''
         game_id_list = []
         for game in self.__game_manager.game_list:
             game_id_list.append(game.id)

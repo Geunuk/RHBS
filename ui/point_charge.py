@@ -82,9 +82,8 @@ class Ui_Dialog(object):
                 self.point_after.setText("????")
 
     def point_charge_ok_btn_clicked_connect(self):
-        print("point charge ok btn clicked")
+        print("확인 버튼 클릭")
         charged_point = self.input_point.text()
-        print("good")
         self.__member.charge_point(charged_point)
 
     def retranslateUi(self, Dialog):

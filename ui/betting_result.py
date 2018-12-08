@@ -68,25 +68,21 @@ class Ui_Dialog(object):
         self.betting_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
     def set_betting_table(self):
-        print("set betting table")
-        #betting_table = table.Table("betting_info")
         count = 0
         for game in self.__game_manager.game_list:
             for bet_info in game.betting_info:
                 if(self.__member.id == bet_info.member_id):
                     count +=1
+
         self.betting_table.setRowCount(count)
-        #self.betting_table.setRowCount(len(betting_table))
         i = 0
         for game in self.__game_manager.game_list:
             for bet_info in game.betting_info:
-                print(1)
                 if(self.__member.id == bet_info.member_id):
-                    print(2)
                     for r, horse in enumerate(game.horses):
                         if (bet_info.horse_name == horse.name):
                             idx = r
-                    #print(idx)
+
                     bet_money = int(bet_info.bet_money)
                     item = QtWidgets.QTableWidgetItem(bet_info.game_id)
                     self.betting_table.setItem(i, 0, item)
@@ -115,9 +111,8 @@ class Ui_Dialog(object):
                 self.betting_table.selectRow(0)
 
     def ok_btn_clicked(self):
-        print("ok btn clicked")
+        print("확인 버튼 클릭")
         self.__dialog.close()
-
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

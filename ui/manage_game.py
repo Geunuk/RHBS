@@ -104,11 +104,11 @@ class Ui_Dialog(object):
             self.present_game_table.selectRow(0)
 
     def game_add_btn_clicked_connect(self):
-        print("game add btn clicked connect")
+        print("경기 추가 버튼 클릭")
         self.__admin.show_game_add_box()
 
     def game_delete_btn_clicked_connect(self):
-        print("game delete btn clicked connect")
+        print("경기 삭제 버튼 클릭")
         delete_idx = self.present_game_table.currentRow()
         self.__admin.delete_game(delete_idx)
 

@@ -36,7 +36,6 @@ class Table(list):
                 return self[i]
 
     def load_file(self):
-        print("load file")
         try:
             with open(self.file_name, 'rb') as f:
                 item_list = pickle.load(f)
@@ -48,7 +47,6 @@ class Table(list):
             print(e)
 
     def save_file(self):
-        print("save file")
         with open(self.file_name, 'wb') as f:
             pickle.dump(self, f)
 
@@ -86,5 +84,3 @@ if __name__ == "__main__":
     t.save_file()
 
     t2 = Table("horse_info")
-    print(t2[22].name)
-

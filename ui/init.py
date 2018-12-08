@@ -147,6 +147,7 @@ class Ui_MainWindow(object):
         self.__gm.check_game_finish()
 
     def init_login_btn_clicked(self):
+        print("로그인 버튼 클릭")
         if self.__am.login_account:
             self.init_login_btn.setText("로그인")
             self.init_signup_btn.setText("회원가입")
@@ -164,36 +165,38 @@ class Ui_MainWindow(object):
             self.__am.show_login_box()
 
     def init_signup_btn_clicked(self):
+        print("회원가입 버튼 클릭")
         if self.__am.login_account :
             self.__am.show_member_info_box()
         else:
             self.__am.show_signup_box()
 
     def init_bet_btn_clicked(self):
-        print("init bet_btn clicked")
+        print("베팅 버튼 클릭")
         logged_in_member = self.__am.login_account
         logged_in_member.show_bet_box()
 
     def init_bet_result_btn_clicked(self):
-        print("show bet result")
+        print("베팅 결과 확인 버튼 클릭")
         logged_in_member = self.__am.login_account
         logged_in_member.show_betting_result_box()
 
     def init_game_status_btn_clicked(self):
+        print("경기 상황 확인 버튼 클릭")
         self.__gm.show_game_status_box()
 
     def init_charge_point_btn_clicked(self):
-        print("init charge point btn clicked")
+        print("포인트 충전 버튼 클릭")
         logged_in_member = self.__am.login_account
         logged_in_member.show_point_charge_box()
 
     def init_exchange_point_btn_clicked(self):
-        print("init exchange point btn clicked")
+        print("포인트 환전 버튼 클릭")
         logged_in_member = self.__am.login_account
         logged_in_member.show_point_exchange_box()
 
     def init_game_manage_btn_clicked(self):
-        print("init game manage btn clicked")
+        print("경기 관리 버튼 클릭")
         logged_in_admin = self.__am.login_account
         logged_in_admin.show_manage_game_box()
 

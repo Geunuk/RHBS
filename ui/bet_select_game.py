@@ -31,8 +31,8 @@ class Ui_Dialog(object):
         self.__dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(300, 250)
-        Dialog.setMinimumSize(QtCore.QSize(300, 250))
-        Dialog.setMaximumSize(QtCore.QSize(300, 250))
+        Dialog.setMinimumSize(QtCore.QSize(500, 500))
+        Dialog.setMaximumSize(QtCore.QSize(500, 500))
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.game_table = QtWidgets.QTableWidget(Dialog)
@@ -56,25 +56,19 @@ class Ui_Dialog(object):
         self.set_game_table()
         self.choice_game_btn.clicked.connect(self.choice_game_btn_clicked_connect)
         self.game_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.game_table.horizontalHeader().setStretchLastSection(True)
 
     def choice_game_btn_clicked_connect(self):
-        print("game choice")
+        print("경기 선택")
+        self.__dialog.setEnabled(False)
         choice_idx = self.game_table.currentRow()
-        print("show betting horse box")
         if(self.__game_manager.game_list[choice_idx].proceeding == False):
-            main_window = self.__init_ui.main_window
-            self.__dialog.setEnabled(False)
-
             self.__bet_select_horse_Dialog = dialog.Dialog_Modified(self.__dialog)
             self.__bet_select_horse_ui = bet_select_horse.Ui_Dialog(self.__member, self.__init_ui,choice_idx)
             self.__bet_select_horse_ui.game_manager = self.__game_manager
             self.__bet_select_horse_ui.setupUi(self.__bet_select_horse_Dialog)
             self.__bet_select_horse_Dialog.show()
         else :
-            print("show error box")
-            main_window = self.__init_ui.main_window
-            main_window.setEnabled(False)
-
             self.__error_Dialog = dialog.Dialog_Modified(self.__dialog)
             self.__error_ui = error.Ui_Dialog(self, self.__dialog)
             self.__error_ui.setupUi(self.__error_Dialog)
@@ -82,8 +76,6 @@ class Ui_Dialog(object):
             self.__error_Dialog.show()
 
     def set_game_table(self):
-        print("set game table")
-        #self.__game_table = table.Table("game_info")
         self.game_table.setRowCount(len(self.__game_manager.game_list))
         for row, game in enumerate(self.__game_manager.game_list):
             item = QtWidgets.QTableWidgetItem(str(game.id))

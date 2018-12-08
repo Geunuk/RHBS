@@ -37,8 +37,8 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
         Dialog.setSizePolicy(sizePolicy)
-        Dialog.setMinimumSize(QtCore.QSize(400, 250))
-        Dialog.setMaximumSize(QtCore.QSize(400, 250))
+        Dialog.setMinimumSize(QtCore.QSize(700, 700))
+        Dialog.setMaximumSize(QtCore.QSize(500, 700))
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.horse_table = QtWidgets.QTableWidget(Dialog)
@@ -82,13 +82,10 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
         self.horse_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.horse_table.horizontalHeader().setStretchLastSection(True)
 
     def set_horse_table(self):
-        print("set horse table")
-        #self.__game_table = table.Table("game_info")
-        #self.__game = self.__game_table[self.__idx]
         game = self.__game_manager.game_list[self.__idx]
-        #print(self.__idx)
         self.horse_table.setRowCount(5)
         for row in range(5):
             item = QtWidgets.QTableWidgetItem(game.horses[row].name)
@@ -102,7 +99,7 @@ class Ui_Dialog(object):
             self.horse_table.selectRow(0)
 
     def betting_btn_clicked(self):
-        print("betting btn clicked")
+        print("베팅 버튼 클릭")
         game = self.__game_manager.game_list[self.__idx]
         choice_idx = self.horse_table.currentRow()
         bet_point = self.input_point.text()
@@ -112,7 +109,6 @@ class Ui_Dialog(object):
         if(game.proceeding == False):
             self.__member.bet(bet_point,pw,game_id,horse_name,self.__dialog)
         else :
-            print("show error box")
             main_window = self.__init_ui.main_window
             main_window.setEnabled(False)
 

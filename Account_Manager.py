@@ -7,6 +7,7 @@ class Account_Manager():
     def __init__(self):
         self.__login_account = None
         self.__gm = None
+
         self.__init_ui = None
         self.__init_window = None
         self.__signup_Dialog = None
@@ -47,7 +48,7 @@ class Account_Manager():
         self.__init_window = init_window
 
     def show_signup_box(self):
-        print("show signup box")
+        print("회원 가입 박스 표시")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
 
@@ -57,7 +58,7 @@ class Account_Manager():
         self.__signup_Dialog.show()
 
     def show_login_box(self):
-        print("show login box")
+        print("로그인 박스 표시")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
 
@@ -67,9 +68,8 @@ class Account_Manager():
         self.__login_Dialog.show()
 
     def show_member_info_box(self):
-        print("show member info box")
+        print("회원 정보 박스 표시")
         main_window = self.__init_ui.main_window
-        print(self.__init_ui.main_window)
         main_window.setEnabled(False)
 
         self.__member_info_Dialog = dialog.Dialog_Modified(self.__init_window)
@@ -78,7 +78,7 @@ class Account_Manager():
         self.__member_info_Dialog.show()
 
     def show_error_box(self, prev_dialog, msg):
-        print("show error box")
+        print("에러 박스 표시")
         main_window = self.__init_ui.main_window
         main_window.setEnabled(False)
 
@@ -89,11 +89,10 @@ class Account_Manager():
         self.__error_Dialog.show()
 
     def signup(self, input_member_info):
-        print("sign up")
+        print("회원 가입")
 
         valid_result = self.isvalid_signup(input_member_info)
         if valid_result == 0:
-            print("valid signup")
             self.__signup_Dialog.close()
             member_table = table.Table("member_info")
             member = member_info.Member_Info(input_member_info[0], input_member_info[1]
@@ -105,22 +104,18 @@ class Account_Manager():
             member_table.save_file()
 
         elif valid_result == 1:
-            print("not valid signup")
             self.__signup_Dialog.setEnabled(False)
             self.show_error_box(self.__signup_Dialog, "빈 항목이 있습니다")
 
         elif valid_result == 2:
-            print("not valid signup")
             self.__signup_Dialog.setEnabled(False)
             self.show_error_box(self.__signup_Dialog, "동일한 ID가 이미 존재합니다")
 
         elif valid_result == 3:
-            print("not valid signup")
             self.__signup_Dialog.setEnabled(False)
             self.show_error_box(self.__signup_Dialog, "패스워드가 일치하지 않습니다")
 
         else:
-            print("not valid signup")
             self.__signup_Dialog.setEnabled(False)
             self.show_error_box(self.__signup_Dialog, "주민번호가 이미 존재합니다")
 
@@ -128,7 +123,6 @@ class Account_Manager():
         valid_result = self.isvalid_login(id, pw)
         if  valid_result == 0:
             self.__login_Dialog.close()
-
             self.__init_ui.login_msg.setText(id + "님 환영합니다!")
             self.__init_ui.init_login_btn.setText("로그아웃")
             self.__init_ui.init_signup_btn.setText("회원정보확인")
@@ -141,8 +135,7 @@ class Account_Manager():
             if self.is_admin(id):
                 self.__init_ui.init_game_manage_btn.setEnabled(True)
                 self.__init_ui.init_signup_btn.setEnabled(False)
-                self.__login_account = Admin.Admin(self.__init_ui, self.__init_window)
-                self.__login_account.game_manager = self.__gm
+                self.__login_account = Admin.Admin(self.__gm, self.__init_ui, self.__init_window)
 
             else:
                 self.__init_ui.init_bet_btn.setEnabled(True)
@@ -157,31 +150,27 @@ class Account_Manager():
                                                      , member_info[6], int(member_info[7])
                                                      , self.__init_ui, self.__init_window,self.__gm)
                 self.__gm.login_account = self.__login_account
-                if(type(self.__login_account == 'Member.Member')):
-                    print(type(self.__login_account))
 
         elif valid_result == 1:
-            print("not valid login")
             self.__login_Dialog.setEnabled(False)
             self.show_error_box(self.__login_Dialog, "빈 항목이 있습니다")
+
         elif valid_result == 2:
-            print("not valid login")
             self.__login_Dialog.setEnabled(False)
             self.show_error_box(self.__login_Dialog, "존재하지 않는 ID 입니다")
 
         else:
-            print("not valid login")
             self.__login_Dialog.setEnabled(False)
             self.show_error_box(self.__login_Dialog, "틀린 패스워드입니다")
 
     def logout(self):
-        print("logout")
+        print("로그 아웃")
         self.__init_ui.login_msg.setText("")
         self.__login_account = None
         self.__gm.login_account = None
 
     def change_member_info(self, pw1, pw2, anum, email, pnum):
-        print("change member info")
+        print("회원 정보 변경")
         valid_result = self.isvalid_change(pw1, pw2, anum,email, pnum)
         if valid_result == 0:
             logged_in_member = self.__login_account
@@ -202,12 +191,12 @@ class Account_Manager():
             member_table.save_file()
 
             return True
+
         elif valid_result == 1:
-            print("not valid change")
             self.__login_Dialog.setEnabled(False)
             self.show_error_box(self.__member_info_Dialog, "빈 항목이 있습니다")
-
             return False
+
         else:
             self.__member_info_ui.modify_flag = True
             self.__login_Dialog.setEnabled(False)
@@ -221,7 +210,6 @@ class Account_Manager():
                   2 => id not exist
                   3 => id, password not agree
         """
-        print("isvalid_login")
         member_table = table.Table("member_info")
         member_table.load_file()
         id_pw_list = member_table.select_row((id,), ('member_id', 'password'))
@@ -243,8 +231,6 @@ class Account_Manager():
                   3 => password not agree
                   4 => duplicate ssn
         """
-        print("isvalid_signup")
-
         id_ = input_member_info[0]
         pw = input_member_info[1]
         pw_repeat = input_member_info[2]
@@ -278,8 +264,6 @@ class Account_Manager():
                           1 => empty input
                           2 => password not agree
         """
-        print("isvalid_signup")
-
         if "" in [pw1, pw2, anum, email, pnum]:
             return 1
         elif pw1 != pw2:
